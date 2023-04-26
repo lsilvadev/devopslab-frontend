@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react'
+
+import { fetchMusic } from '../../integrations/MusicAPI';
+
 import { HomeContainerStyled } from './home.style'
 import MusicListComponent from '../music-list';
-import axios from 'axios';
 
 function HomeComponent() {
-    const [musics, setMusics] = useState();
+  const [musics, setMusics] = useState();
 
-    async function getMusics() {
-        await axios("https://backend-xqpysnlvlq-ue.a.run.app/")
-        .then((res) => setMusics(res.data))
-        .catch((err) => console.log("error"));
-    }
-
-	useEffect(() => {
-		getMusics()
-	}, []);
+  useEffect(() => {
+    (async () => {
+      const response = await fetchMusic();
+      setMusics(response);
+    })();
+  }, []);
 
   return (
     <HomeContainerStyled>
-        {musics && (
-           <MusicListComponent musicList={musics} /> 
-        )}
+      <MusicListComponent musicList={musics} /> 
+      {/* {musics && (
+        <MusicListComponent musicList={musics} /> 
+      )} */}
     </HomeContainerStyled>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 
 import HomeComponent from "./components/home";
-import Header from "./components/Header";
+import Header from "./components/header/header.component";
 
 import "./App.css";
 
@@ -16,4 +16,3 @@ function App() {
 }
 
 export default App;
-

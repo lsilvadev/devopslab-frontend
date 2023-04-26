@@ -7,6 +7,7 @@ export const MusicListContainerStyled = styled('div')`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: 100vh;
 `
 
 export const FilterTitleStyled = styled('p')`
