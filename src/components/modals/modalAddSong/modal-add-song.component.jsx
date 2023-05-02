@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, Form, message } from 'antd';
 
 import { GENRES_TYPES } from '../../../defaults/genres';
-import { saveSong, fetchSongs } from '../../../integrations/MusicAPI';
+import { saveSong, fetchSongs } from '../../../integrations/SongAPI';
 import { getRuleFormItem } from '../../../utility/getRuleFormItem';
 
 import { 

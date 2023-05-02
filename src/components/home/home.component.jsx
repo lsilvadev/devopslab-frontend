@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react'
-
-import { fetchMusic } from '../../integrations/MusicAPI';
+import React from 'react'
+import PropTypes from 'prop-types';
 
 import { HomeContainerStyled } from './home.style'
-import MusicListComponent from '../music-list';
+import SongListComponent from '../music-list';
 
-function HomeComponent() {
-  const [musics, setMusics] = useState();
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetchMusic();
-      setMusics(response);
-    })();
-  }, []);
-
+function HomeComponent({ songs }) {
   return (
     <HomeContainerStyled>
-      <MusicListComponent musicList={musics} /> 
-      {/* {musics && (
-        <MusicListComponent musicList={musics} /> 
-      )} */}
+      <SongListComponent songs={songs} /> 
     </HomeContainerStyled>
-  )
-}
+  );
+};
+
+SongListComponent.propTypes = {
+  songs: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default HomeComponent
