@@ -12,6 +12,27 @@ import {
 function ModalAddSong({ isModalOpen, handleCancel, setSongs }) {
   const [loading, setLoading] = useState(false);
 
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    addNewMusic(values);
+  };
+  const addNewMusic = useCallback(async (body) => {
+    const response = await saveMusic(body);
+    if (response.status !== 200) {
+      message.warning('Não foi possivel salvar a música.');
+      return;
+    }
+
+    message.success('Música salva com sucesso.');
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetchSongs();
+      setSongs(response);
+    })();
+  }, []);
+
   return (
     <Modal 
       open={isModalOpen}  
@@ -19,6 +40,7 @@ function ModalAddSong({ isModalOpen, handleCancel, setSongs }) {
       onCancel={handleCancel}
     >
       <Title>Cadastrar música</Title>
+
       <Form form={form} onFinish={onFinish}>
         <Form.Item 
           name="artist" 
@@ -39,6 +61,10 @@ function ModalAddSong({ isModalOpen, handleCancel, setSongs }) {
           rules={[getRuleFormItem('selecione o gênero')]}
         >
           <Select placeholder="Gênero" options={GENRES_TYPES} />
+        </Form.Item>
+
+        <Form.Item>
+          <BtnAddMusic loading={loading}>Cadastrar</BtnAddMusic>
         </Form.Item>
       </Form>
     </Modal>
