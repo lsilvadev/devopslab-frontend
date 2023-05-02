@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, Form, message } from 'antd';
 
 import { GENRES_TYPES } from '../../../defaults/genres';
+import { saveSong, fetchSongs } from '../../../integrations/MusicAPI';
 import { getRuleFormItem } from '../../../utility/getRuleFormItem';
 import { 
   Title,
@@ -17,13 +18,15 @@ function ModalAddSong({ isModalOpen, handleCancel, setSongs }) {
     addNewMusic(values);
   };
   const addNewMusic = useCallback(async (body) => {
-    const response = await saveMusic(body);
+    const response = await saveSong(body);
     if (response.status !== 200) {
       message.warning('Não foi possivel salvar a música.');
       return;
     }
 
     message.success('Música salva com sucesso.');
+  const resetFields = useCallback(() => {
+    form.resetFields();
   }, []);
 
   useEffect(() => {
