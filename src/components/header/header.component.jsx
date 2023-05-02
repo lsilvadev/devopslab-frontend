@@ -8,6 +8,7 @@ import {
   ContainerLogo,
   Logo,
   AppName,
+  ButtonStyled
 } from './header.style'
 
 function Header({ setSongs }) {
@@ -27,6 +28,8 @@ function Header({ setSongs }) {
         <Logo src="./logo.png" />
         <AppName>dt music</AppName>
       </ContainerLogo>
+      <ButtonStyled onClick={showModal}>Adicionar música</ButtonStyled>
+
       <ModalAddSong 
         isModalOpen={isModalOpen} 
         handleCancel={handleCancel} 
@@ -35,7 +38,9 @@ function Header({ setSongs }) {
     </Container>
   );
 };
+
 Header.propTypes = {
   setSongs: PropTypes.func.isRequired,
 };
+
 export default Header;

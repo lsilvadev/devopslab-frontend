@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Select } from 'antd'
+import { Button } from 'antd'
 
 import { PRIMARY_COLOR, WHITE, DARK_PRIMARY_COLOR } from '../../defaults/Colors';
 
@@ -25,7 +25,9 @@ export const AppName = styled.h1`
   color: ${WHITE};
 `;
 
-export const ButtonStyled = styled(Button)`
+export const ButtonStyled = styled(Button).attrs({
+  type: 'primary'
+})`
   background-color: ${DARK_PRIMARY_COLOR};
   border-color: ${DARK_PRIMARY_COLOR};
   color: ${WHITE};
