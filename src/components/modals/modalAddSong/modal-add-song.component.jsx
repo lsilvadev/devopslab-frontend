@@ -5,26 +5,35 @@ import { Modal, Form, message } from 'antd';
 import { GENRES_TYPES } from '../../../defaults/genres';
 import { saveSong, fetchSongs } from '../../../integrations/MusicAPI';
 import { getRuleFormItem } from '../../../utility/getRuleFormItem';
+
 import { 
   Title,
   Input, 
   Select,
+  BtnAddMusic
 } from './modal-add-component.style';
+
 function ModalAddSong({ isModalOpen, handleCancel, setSongs }) {
   const [loading, setLoading] = useState(false);
 
   const [form] = Form.useForm();
+
   const onFinish = (values) => {
+    setLoading(true);
     addNewMusic(values);
   };
+
   const addNewMusic = useCallback(async (body) => {
     const response = await saveSong(body);
+    setLoading(false);
+
     if (response.status !== 200) {
       message.warning('Não foi possivel salvar a música.');
       return;
     }
 
     message.success('Música salva com sucesso.');
+    handleCancel();
     resetFields();
     reloadSongs();
   }, []);
