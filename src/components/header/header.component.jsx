@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import ModalAddSong from '../modals/modalAddSong/modal-add-song.component';
+
+import { 
+  Container, 
+  ContainerLogo,
+  Logo,
+  AppName,
+} from './header.style'
 
 function Header({ setSongs }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,11 +20,19 @@ function Header({ setSongs }) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  return (
+    <Container>
+      <ContainerLogo>
+        <Logo src="./logo.png" />
+        <AppName>dt music</AppName>
+      </ContainerLogo>
       <ModalAddSong 
         isModalOpen={isModalOpen} 
         handleCancel={handleCancel} 
         setSongs={setSongs} 
       />
+    </Container>
   );
 };
 Header.propTypes = {
