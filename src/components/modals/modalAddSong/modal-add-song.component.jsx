@@ -25,6 +25,15 @@ function ModalAddSong({ isModalOpen, handleCancel, setSongs }) {
     }
 
     message.success('Música salva com sucesso.');
+    resetFields();
+    reloadSongs();
+  }, []);
+
+  const reloadSongs = useCallback(async () => {
+    const response = await fetchSongs();
+    setSongs(response);
+  }, []);
+
   const resetFields = useCallback(() => {
     form.resetFields();
   }, []);
