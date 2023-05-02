@@ -58,7 +58,10 @@ function ModalAddSong({ isModalOpen, handleCancel, setSongs }) {
     <Modal 
       open={isModalOpen}  
       footer={[]}
-      onCancel={handleCancel}
+      onCancel={() => {
+        resetFields();
+        handleCancel();
+      }}
     >
       <Title>Cadastrar música</Title>
 
