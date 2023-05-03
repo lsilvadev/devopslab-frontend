@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types';
+
 import { HomeContainerStyled } from './home.style'
-import MusicListComponent from '../music-list';
-import axios from 'axios';
+import SongListComponent from '../music-list';
 
-function HomeComponent() {
-    const [musics, setMusics] = useState();
-
-    async function getMusics() {
-        await axios("https://backend-xqpysnlvlq-ue.a.run.app/")
-        .then((res) => setMusics(res.data))
-        .catch((err) => console.log("error"));
-    }
-
-	useEffect(() => {
-		getMusics()
-	}, []);
-
+function HomeComponent({ songs }) {
   return (
     <HomeContainerStyled>
-        {musics && (
-           <MusicListComponent musicList={musics} /> 
-        )}
+      <SongListComponent songs={songs} /> 
     </HomeContainerStyled>
-  )
-}
+  );
+};
+
+SongListComponent.propTypes = {
+  songs: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default HomeComponent

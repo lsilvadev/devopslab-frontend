@@ -1,3 +1,3 @@
-import MusicListComponent from "./music-list.component";
+import SongListComponent from "./song-list.component";
 
-export default MusicListComponent
+export default SongListComponent
